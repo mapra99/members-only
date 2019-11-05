@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
         token = SecureRandom.urlsafe_base64
         Digest::SHA1.hexdigest(token).to_s
     end
+
+    def current_user
+        @user ||= User.find_by(remember_token: cookies.permanent[:remember_token])
+    end
+
+    def signout
+        @user = nil
+        cookies.delete :remember_token
+    end
 end
