@@ -3,6 +3,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    redirect_to root_path
+    @user = User.find_by(email:params[:session][:email].downcase)
+    if @user && @user.authenticate(params[:session][:password])
+
+    signin 
+      render html: "Loged in"
+    else
+      render html: "Not Loged in "
+    end
+   
   end
 end
