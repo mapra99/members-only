@@ -2,8 +2,8 @@
 
 class ApplicationController < ActionController::Base
   def signin
-    @user.update(remember_token: new_remember_token)
-    cookies.permanent[:remember_token] = @user.remember_token
+    @current_user.update(remember_token: new_remember_token)
+    cookies.permanent[:remember_token] = @current_user.remember_token
   end
 
   def new_remember_token
@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @user ||= User.find_by(remember_token: cookies.permanent[:remember_token])
+    @current_user ||= User.find_by(remember_token: cookies.permanent[:remember_token])
   end
 
   def signout
-    @user = nil
+    @current_user = nil
     cookies.delete :remember_token
   end
 end

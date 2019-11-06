@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user&.authenticate(params[:session][:password])
+    @current_user = User.find_by(email: params[:session][:email].downcase)
+    if @current_user&.authenticate(params[:session][:password])
 
       signin
       redirect_to root_path
