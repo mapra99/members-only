@@ -11,10 +11,4 @@
 <%= f.submit "Log in" %>
 <% end %>
 
-<%= link_to "Log Out", logout_path, :method => :delete %>
-
-
-   
-
-
-
+<p>Don't have an account? Please <%=link_to "Sign Up", users_new_path %> </p>

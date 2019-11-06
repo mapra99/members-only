@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
 
     signin 
-      render html: "Loged in"
+      redirect_to root_path
     else
       render html: "Not Loged in "
     end
