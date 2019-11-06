@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
-  before_action :user_only, only: [:new, :create]
+  before_action :user_only, only: %i[new create]
 
   def new
     @post = Post.new
@@ -11,7 +13,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_path
     else
-      render html: "Post is not saved"
+      render html: 'Post is not saved'
     end
   end
 
@@ -25,9 +27,7 @@ class PostsController < ApplicationController
     redirect_to login_path unless current_user
   end
 
-    def post_params
-      params.require(:post).permit(:title, :body)
-      
-    end
-
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
 end
