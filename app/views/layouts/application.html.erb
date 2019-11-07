@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MembersOnly</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><%= link_to "Home", root_path %> </li>
+          <li><%= link_to "New post", posts_new_path %> </li>
+          <% if current_user %>
+            <li><%= link_to "Logout", logout_path, :method => :delete %> </li>
+          <% else %>
+            <li><%= link_to "Sign up", users_new_path %> </li>
+            <li><%= link_to "Login", login_path %> </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <%= yield %>
+  </body>
+</html>
